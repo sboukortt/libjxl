@@ -113,7 +113,7 @@ void RoundtripRandomUnbalancedStream(int alphabet_size) {
   constexpr int kPrecision = 1 << 10;
   Rng rng(0);
   for (size_t i = 0; i < kReps; i++) {
-    std::vector<int> distributions[kNumHistograms];
+    std::vector<int> distributions[kNumHistograms] = {};
     FillDistributions(alphabet_size, kNumHistograms, kPrecision, rng,
                       distributions);
     std::vector<Token> symbols;
