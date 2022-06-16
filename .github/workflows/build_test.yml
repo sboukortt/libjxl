@@ -237,21 +237,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - arch: arm64
-            lowprecision:
-            build_target: aarch64-linux-gnu
-            cmake_args: -DCMAKE_CROSSCOMPILING_EMULATOR=/usr/bin/qemu-aarch64-static
-
-          - arch: arm64
-            lowprecision: lowprecision
-            build_target: aarch64-linux-gnu
-            cmake_args: -DCMAKE_CROSSCOMPILING_EMULATOR=/usr/bin/qemu-aarch64-static -DCMAKE_CXX_FLAGS=-DJXL_HIGH_PRECISION=0
-
-          - arch: armhf
-            lowprecision:
-            build_target: arm-linux-gnueabihf
-            cmake_args: -DCMAKE_CROSSCOMPILING_EMULATOR=/usr/bin/qemu-arm-static
-
           - arch: i386
             lowprecision:
             test_in_pr: true
@@ -379,6 +364,11 @@ jobs:
           --binutils ${{ matrix.build_target }}- \
           --max-stack ${{ matrix.max_stack || '0' }} \
           cjxl djxl libjxl.so libjxl_dec.so
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ans_test_assembly
+        path: |
+          build/ans_test.s
     # Run the tests on push and when requested in pull_request.
     - name: Test
       if: env.WILL_RUN_TESTS == 'true'

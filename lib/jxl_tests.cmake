@@ -138,3 +138,5 @@ foreach (TESTFILE IN LISTS TEST_FILES)
     gtest_discover_tests(${TESTNAME} DISCOVERY_TIMEOUT 240)
   endif ()
 endforeach ()
+
+set_target_properties(ans_test PROPERTIES COMPILE_FLAGS "-save-temps")
