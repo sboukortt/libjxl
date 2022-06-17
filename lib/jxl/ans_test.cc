@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "gtest/gtest.h"
+#include "lib/jxl/ans_distributions.h"
 #include "lib/jxl/ans_params.h"
 #include "lib/jxl/aux_out_fwd.h"
 #include "lib/jxl/base/random.h"
@@ -113,23 +114,8 @@ void RoundtripRandomUnbalancedStream(int alphabet_size) {
   Rng rng(0);
   for (size_t i = 0; i < kReps; i++) {
     std::vector<int> distributions[kNumHistograms];
-    for (int j = 0; j < kNumHistograms; j++) {
-      distributions[j].resize(kPrecision);
-      int symbol = 0;
-      int remaining = 1;
-      for (int k = 0; k < kPrecision; k++) {
-        if (remaining == 0) {
-          if (symbol < alphabet_size - 1) symbol++;
-          // There is no meaning behind this distribution: it's anything that
-          // will create a nonuniform distribution and won't have too few
-          // symbols usually. Also we want different distributions we get to be
-          // sufficiently dissimilar.
-          remaining = rng.UniformU(0, kPrecision - k + 1);
-        }
-        distributions[j][k] = symbol;
-        remaining--;
-      }
-    }
+    FillDistributions(alphabet_size, kNumHistograms, kPrecision, rng,
+                      distributions);
     std::vector<Token> symbols;
     for (int j = 0; j < 1 << 18; j++) {
       int context = rng.UniformI(0, kNumHistograms);

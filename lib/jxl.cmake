@@ -17,6 +17,8 @@ set(JPEGXL_INTERNAL_SOURCES_DEC
   jxl/alpha.h
   jxl/ans_common.cc
   jxl/ans_common.h
+  jxl/ans_distributions.cc
+  jxl/ans_distributions.h
   jxl/ans_params.h
   jxl/aux_out.cc
   jxl/aux_out.h
