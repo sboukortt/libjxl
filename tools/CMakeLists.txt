@@ -178,6 +178,7 @@ if(JPEGXL_ENABLE_DEVTOOLS)
     generate_lut_template
     ssimulacra_main
     ssimulacra2
+    to_exr
     xyb_range
     jxl_from_tree
   )
@@ -194,6 +195,7 @@ if(JPEGXL_ENABLE_DEVTOOLS)
   add_executable(tone_map hdr/tone_map.cc)
   add_executable(texture_to_cube hdr/texture_to_cube.cc)
   add_executable(generate_lut_template hdr/generate_lut_template.cc)
+  add_executable(to_exr hdr/to_exr.cc)
   add_executable(xyb_range xyb_range.cc)
   add_executable(jxl_from_tree jxl_from_tree.cc)
 
