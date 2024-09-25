@@ -376,13 +376,13 @@ jobs:
       if: github.event_name == 'release'
       run: |
         C:\"Program Files"\7-Zip\7z.exe -mx a jxl-${{matrix.triplet}}.zip prefix\bin\* prefix\lib\*
-        C:\"Program Files"\7-Zip\7z.exe -mx -sfxC:\"Program Files"\7-Zip\7z.sfx a jxl-${{matrix.triplet}}.exe prefix\bin\* prefix\lib\*
+        C:\"Program Files"\7-Zip\7z.exe -mx a jxl-${{matrix.triplet}}.7z prefix\bin\* prefix\lib\*
         C:\"Program Files"\7-Zip\7z.exe rn jxl-${{matrix.triplet}}.zip prefix jxl-${{matrix.triplet}}
-        C:\"Program Files"\7-Zip\7z.exe rn jxl-${{matrix.triplet}}.exe prefix jxl-${{matrix.triplet}}
+        C:\"Program Files"\7-Zip\7z.exe rn jxl-${{matrix.triplet}}.7z prefix jxl-${{matrix.triplet}}
 
     - name: Upload binaries to release
       if: github.event_name == 'release'
       uses: AButler/upload-release-assets@3d6774fae0ed91407dc5ae29d576b166536d1777 # v3.0
       with:
-        files: jxl-${{matrix.triplet}}.zip;jxl-${{matrix.triplet}}.exe
+        files: jxl-${{matrix.triplet}}.zip;jxl-${{matrix.triplet}}.7z
         repo-token: ${{ secrets.GITHUB_TOKEN }}
