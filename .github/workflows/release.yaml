@@ -381,5 +381,5 @@ jobs:
       if: github.event_name == 'release'
       uses: AButler/upload-release-assets@3d6774fae0ed91407dc5ae29d576b166536d1777 # v3.0
       with:
-        files: jxl-${{matrix.triplet}}.zip
+        files: jxl-${{matrix.triplet}}.7z
         repo-token: ${{ secrets.GITHUB_TOKEN }}
